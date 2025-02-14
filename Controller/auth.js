@@ -8,7 +8,8 @@ export const CreateUser = async (req, res, next) => {
     if (decode.type === "user.created") {
       const { id, email, first_name, last_name } = decode.data.user;
       const finduser = await User.findOne({ kindeID: id });
-      if (finduser) return;
+      if (finduser)
+        return res.status(201).json({ message: "User already exists" });
       await User.create({
         kindeID: id,
         email,
