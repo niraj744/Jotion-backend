@@ -7,6 +7,8 @@ export const CreateUser = async (req, res, next) => {
     const decode = jwt.decode(token);
     if (decode.type === "user.created") {
       const { id, email, first_name, last_name } = decode.data.user;
+      const finduser = await User.findOne({ kindeID: id });
+      if (finduser) return;
       await User.create({
         kindeID: id,
         email,
