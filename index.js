@@ -15,6 +15,9 @@ app.use(
   })
 );
 app.use(express.json());
+app.get("/", (req, res) => {
+  return res.send("Hello, Notion Clone Server!");
+});
 app.use("/api/auth", authRouter);
 app.use((error, req, res, next) => {
   console.log(error);
